@@ -1,14 +1,13 @@
 const path = require('path')
 const express = require('express')
 const app = express()
-const isDev = process.env.NODE_ENV !== 'production'
-const port = isDev ? 3000 : process.env.PORT
+const isDevelopment = process.env.NODE_ENV !== 'production'
+const port = isDevelopment ? 3000 : process.env.PORT
 
-
-if (isDev) {
+if (isDevelopment) {
   require('./webpackServeBundle')(app)
 } else {
-  app.use(express.static(path.join(__dirname + '/../dist')))
+  app.use(express.static(path.join(__dirname, '/../dist')))
   app.get('*', (req, res) =>
     res.sendFile(path.join(__dirname, '/../dist/index.html'))
   )
