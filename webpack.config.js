@@ -1,8 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
-var merge = require('webpack-merge')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const autoprefixer = require( 'autoprefixer' )
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const merge = require('webpack-merge')
 const TARGET = process.env.npm_lifecycle_event
 
 const common = {
@@ -23,19 +25,16 @@ const common = {
 
   module: {
     loaders: [
-    {
-      test:    /\.elm$/,
-      exclude: [/elm-stuff/, /node_modules/],
-      loader:  'elm-hot!elm-webpack?verbose=true&warn=true'
-    },
-    {
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
-    }]
-  }
+      {
+        test: /\.json?$/,
+        loader: 'json'
+      }
+    ]
+  },
+
+  postcss: [
+    autoprefixer({ browsers: ['last 2 versions']})
+  ]
 }
 
 if (TARGET === 'start') {
@@ -50,7 +49,21 @@ if (TARGET === 'start') {
     output: {
       path: path.join(__dirname, '/dist/'),
       filename: '[name].js',
-      publicPath: '/'
+      publicPath: ''
+    },
+
+    module: {
+      loaders: [
+        {
+          test:    /\.elm$/,
+          exclude: [/elm-stuff/, /node_modules/],
+          loader:  'elm-hot!elm-webpack?verbose=true&warn=true'
+        },
+        {
+          test: /\.(css|scss)$/,
+          loaders: ['style', 'css', 'sass', 'postcss']
+        }
+      ]
     },
 
     plugins: [
@@ -72,7 +85,24 @@ if (TARGET === 'build') {
     output: {
       path: path.join(__dirname, '/dist/'),
       filename: '[name]-[hash].min.js',
-      publicPath: '/'
+      publicPath: ''
+    },
+
+     module: {
+      loaders: [
+        {
+          test:    /\.elm$/,
+          exclude: [/elm-stuff/, /node_modules/],
+          loader:  'elm-webpack'
+        },
+        {
+          test: /\.(css|scss)$/,
+          loader: ExtractTextPlugin.extract(
+            'style',
+            'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!sass!postcss'
+          )
+        }
+      ]
     },
 
     plugins: [
@@ -84,11 +114,13 @@ if (TARGET === 'build') {
       }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': 'production'
+      }),
+      new ExtractTextPlugin('[hash].css', {allChunks: true}),
+      new webpack.optimize.UglifyJsPlugin({
+        minimize: true,
+        compressor: { warnings: false }
+        // mangle:  true
       })
-    ],
-
-    postcss: [
-      require('autoprefixer')
     ]
   })
 }
