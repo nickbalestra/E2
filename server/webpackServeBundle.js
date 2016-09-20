@@ -8,8 +8,6 @@ module.exports = app => {
   const compiler = webpack(config)
   const middleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
-    hot: true,
-    contentBase: 'src',
     stats: {
       colors: true,
       hash: false,
