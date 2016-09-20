@@ -24,9 +24,11 @@
     "start": "node server",
     "prod": "NODE_ENV=production PORT=3000 node server",
     "postinstall": "elm-package install",
-    "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors"
+    "build": "rimraf dist && NODE_ENV=production webpack --progress --profile --colors"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.13.3"
+  },
   "devDependencies": {
     "autoprefixer": "^6.0.3",
     "copy-webpack-plugin": "^3.0.1",
@@ -34,7 +36,6 @@
     "elm": "^0.17.1",
     "elm-hot-loader": "^0.3.4",
     "elm-webpack-loader": "^3.0.6",
-    "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.8.2",
     "html-webpack-plugin": "^1.6.1",
     "json-loader": "^0.5.3",
@@ -43,6 +44,7 @@
     "style-loader": "^0.12.4",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.2.0"
+    "webpack-hot-middleware": "^2.2.0",
+    "webpack-merge": "^0.14.1"
   }
 }
