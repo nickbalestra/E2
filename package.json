@@ -20,12 +20,17 @@
   },
   "homepage": "https://github.com/nickbalestra/webpack-express-elm-boilerplate",
   "scripts": {
+    "pre-commit-msg": "echo JavaScript Standard Style Check... && exit 0",
     "test": "standard server/**/*.js src/**/*.js",
     "start": "node server/main",
     "prod": "NODE_ENV=production PORT=3000 node server/main",
     "postinstall": "elm-package install",
     "build": "rimraf dist && NODE_ENV=production webpack --progress --profile --colors"
   },
+  "pre-commit": [
+    "pre-commit-msg",
+    "test"
+  ],
   "dependencies": {
     "express": "^4.13.3"
   },
@@ -41,6 +46,7 @@
     "json-loader": "^0.5.3",
     "node-sass": "^3.10.0",
     "postcss-loader": "^0.6.0",
+    "pre-commit": "^1.1.3",
     "rimraf": "^2.4.3",
     "sass-loader": "^4.0.2",
     "standard": "^8.1.0",
