@@ -43,7 +43,7 @@ if (TARGET === 'start') {
 
     entry: [
       'webpack-hot-middleware/client?reload=true',
-      path.join(__dirname, 'src/static/index.js')
+      path.join(__dirname, 'src/static/main.js')
     ],
 
     output: {
@@ -79,7 +79,7 @@ if (TARGET === 'start') {
 if (TARGET === 'build') {
   module.exports = merge(common, {
     entry: [
-      path.join(__dirname, 'src/static/index.js')
+      path.join(__dirname, 'src/static/main.js')
     ],
 
     output: {

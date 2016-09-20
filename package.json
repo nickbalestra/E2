@@ -2,7 +2,7 @@
   "name": "webpack-express-elm-boilerplate",
   "version": "1.0.0",
   "description": "A boilerplate for running a Webpack workflow with Elm in Node express",
-  "main": "server.js",
+  "main": "server/main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/nickbalestra/webpack-express-elm-boilerplate.git"
@@ -21,8 +21,8 @@
   "homepage": "https://github.com/nickbalestra/webpack-express-elm-boilerplate",
   "scripts": {
     "test": "standard server/**/*.js src/**/*.js",
-    "start": "node server",
-    "prod": "NODE_ENV=production PORT=3000 node server",
+    "start": "node server/main",
+    "prod": "NODE_ENV=production PORT=3000 node server/main",
     "postinstall": "elm-package install",
     "build": "rimraf dist && NODE_ENV=production webpack --progress --profile --colors"
   },
