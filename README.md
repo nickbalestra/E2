@@ -29,7 +29,7 @@ A boilerplate for running Elm with a Webpack workflow in Node express
  [ ] TODO
 
 ### Standards JS and Precommit hook
-  [ ] TODO
+  [X] TODO
 ***
 
 ## Elm by default
@@ -43,7 +43,7 @@ To turn off CSS Modules remove it from the `webpack.config.js` file.
 [] TODO
 
 ## Standard JS
-[] TODO
+[X] TODO
 
 ## Elm-format
 [] TODO
