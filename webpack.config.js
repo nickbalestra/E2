@@ -6,7 +6,8 @@ const autoprefixer = require( 'autoprefixer' )
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 const merge = require('webpack-merge')
 const TARGET = process.env.npm_lifecycle_event
-
+const entryPath = path.join(__dirname, 'src/static/main.js')
+const outputPath = path.join(__dirname, '/dist/')
 const common = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -43,11 +44,11 @@ if (TARGET === 'start') {
 
     entry: [
       'webpack-hot-middleware/client?reload=true',
-      path.join(__dirname, 'src/static/main.js')
+      entryPath
     ],
 
     output: {
-      path: path.join(__dirname, '/dist/'),
+      path: outputPath,
       filename: '[name].js',
       publicPath: ''
     },
@@ -79,11 +80,11 @@ if (TARGET === 'start') {
 if (TARGET === 'build') {
   module.exports = merge(common, {
     entry: [
-      path.join(__dirname, 'src/static/main.js')
+      entryPath
     ],
 
     output: {
-      path: path.join(__dirname, '/dist/'),
+      path: outputPath,
       filename: '[name]-[hash].min.js',
       publicPath: ''
     },
