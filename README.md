@@ -32,13 +32,14 @@ A boilerplate for running Elm with a Webpack workflow in Node express
  [ ] TODO
 
 ### Standards JS and Precommit hook
-  [X] TODO
+  [ ] TODO
 ***
 
 ## Elm by default
 The project runs with Elm by default and hot replacement of changes to the modules. Currently it is on 0.17.1
 
 ## CSS Modules
+[ ] TODO
 CSS files loaded into components are locally scoped and you can point to class names with javascript. You can also compose classes together, also from other files. These are also hot loaded. Read more about them [here](http://glenmaddern.com/articles/css-modules).
 To turn off CSS Modules remove it from the `webpack.config.js` file.
 
@@ -46,7 +47,7 @@ To turn off CSS Modules remove it from the `webpack.config.js` file.
 [] TODO
 
 ## Standard JS
-[X] TODO
+[ ] TODO
 
 ## Elm-format
 [] TODO
