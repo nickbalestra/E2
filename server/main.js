@@ -6,6 +6,8 @@ const app = express()
 const routes = require('./routes')
 app.set('json spaces', 2)
 app.get('/foo', routes.foo)
+app.get('/bar', routes.bar)
+app.get('/baz', routes.baz)
 
 // Serving compiled elm client
 const isDevelopment = process.env.NODE_ENV !== 'production'
