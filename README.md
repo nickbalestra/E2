@@ -1,6 +1,9 @@
 # webpack-express-elm-boilerplate
 A boilerplate for running Elm with a Webpack workflow in Node express
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+<br><br>
+
 [ ] TODO: Please read the related blog post: [The ultimate Elm Webpack setup](TODO) to know more about this boilerplate.
 
 **NOTE!** Use the latest version of Node, 6.x.x.
@@ -50,8 +53,3 @@ dist/
 
 ## Elm by default
 The project runs with Elm by default and hot replacement of changes to the modules. Currently it is on 0.17.1
-
-## CSS
-CSS files loaded into Main.js are locally scoped and you can point to class names with javascript. You can also compose classes together, also from other files. These are also hot loaded. Read more about them [here](http://glenmaddern.com/articles/css-modules).
-To turn off CSS Modules remove it from the `webpack.config.js` file.
-
