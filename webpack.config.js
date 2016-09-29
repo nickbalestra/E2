@@ -48,7 +48,7 @@ if (TARGET === 'start') {
 
     output: {
       path: path.join(__dirname, '/dist/'),
-      filename: '[name].js',
+      filename: 'static/js/[name].js',
       publicPath: ''
     },
 
@@ -84,7 +84,7 @@ if (TARGET === 'build') {
 
     output: {
       path: path.join(__dirname, '/dist/'),
-      filename: '[name]-[hash].min.js',
+      filename: 'static/js/[name]-[hash].min.js',
       publicPath: ''
     },
 
@@ -115,7 +115,7 @@ if (TARGET === 'build') {
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': 'production'
       }),
-      new ExtractTextPlugin('[hash].css', {allChunks: true}),
+      new ExtractTextPlugin('static/css/[hash].css', {allChunks: true}),
       new webpack.optimize.UglifyJsPlugin({
         minimize: true,
         compressor: { warnings: false }
