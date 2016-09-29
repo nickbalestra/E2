@@ -25,25 +25,33 @@ A boilerplate for running Elm with a Webpack workflow in Node express
 2. `npm run prod` to serve them
 3.  open http://localhost:3000 in your favorite browser.
 
+Production `dist` directory structure:
+```
+dist/
+  index.html
+  static/
+    css/
+      hash.css
+    img/
+      elm.png
+    js/
+      main-hash.min.js
+```
+
+
 ### Tests
  [ ] TODO
 
 ### Standards JS and Precommit hook
-  [ ] TODO
+  [Elm-format](https://github.com/avh4/elm-format) will take care of everything related to elm. For anything javascript related we'll rely on [standardJS](https://github.com/feross/standard).
+  On `npm test` standard will check every .js file inside the `/server` and `/src` directories making sure they all comply to the standard javascript style.
+
 ***
 
 ## Elm by default
 The project runs with Elm by default and hot replacement of changes to the modules. Currently it is on 0.17.1
 
-## CSS Modules
-CSS files loaded into components are locally scoped and you can point to class names with javascript. You can also compose classes together, also from other files. These are also hot loaded. Read more about them [here](http://glenmaddern.com/articles/css-modules).
+## CSS
+CSS files loaded into Main.js are locally scoped and you can point to class names with javascript. You can also compose classes together, also from other files. These are also hot loaded. Read more about them [here](http://glenmaddern.com/articles/css-modules).
 To turn off CSS Modules remove it from the `webpack.config.js` file.
 
-## Babel
-[] TODO
-
-## Standard JS
-[] TODO
-
-## Elm-format
-[] TODO
