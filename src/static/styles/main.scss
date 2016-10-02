@@ -1,9 +1,39 @@
 $baseColor : white;
 
-body {
-  background-color: $baseColor
+html {
+  height: 100%
 }
 
-a {
-    display: flex;
+body {
+  background-color: $baseColor;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  height: 100%;
+  margin: 0
 }
+
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.actions {
+  flex: none;
+  max-width: 50%;
+}
+
+.btn {
+  border-radius: 4px;
+  background-color: #FFFFFF; /* Green */
+  border: none;
+  color: #333333;
+  display: inline-block;
+  font-weight: 300;
+  font-size: 16px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+}
+
+button:hover {cursor: pointer}
+button:focus {outline:0;}
