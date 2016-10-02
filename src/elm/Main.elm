@@ -2,21 +2,27 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Http
 import Html.App as Html
-import Html.Events exposing (onClick)
-
-
--- component import example
-
-import Components.Hello exposing (hello)
-
-
--- APP
+import Task exposing (Task)
+import Json.Decode exposing (Decoder)
 
 
 main : Program Never
 main =
-    Html.beginnerProgram { model = model, view = view, update = update }
+    Html.program
+        { view = view
+        , update = update
+        , init = ( initialModel, Cmd.none )
+        , subscriptions = \_ -> Sub.none
+        }
+
+
+fetchColor : Cmd Msg
+fetchColor =
+    Http.get Json.Decode.string "http://localhost:3000/color"
+        |> Task.perform HandleColorError HandleNewColor
 
 
 
@@ -24,12 +30,13 @@ main =
 
 
 type alias Model =
-    Int
+    { color : String
+    }
 
 
-model : number
-model =
-    0
+initialModel : Model
+initialModel =
+    Model "#FFFFFF"
 
 
 
@@ -37,22 +44,22 @@ model =
 
 
 type Msg
-    = NoOp
-    | Increment
-    | Reset
+    = ChangeColor
+    | HandleNewColor String
+    | HandleColorError Http.Error
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoOp ->
-            model
+        ChangeColor ->
+            ( model, fetchColor )
 
-        Increment ->
-            model + 1
+        HandleNewColor color ->
+            ( { model | color = color }, Cmd.none )
 
-        Reset ->
-            0
+        HandleColorError error ->
+            ( model, Cmd.none )
 
 
 
@@ -61,33 +68,9 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "container", style [ ( "margin-top", "30px" ), ( "text-align", "center" ) ] ]
-        [ -- inline CSS (literal)
-          div [ class "row" ]
-            [ div [ class "col-xs-12" ]
-                [ div [ class "jumbotron" ]
-                    [ img [ src "static/img/elm.png", style styles.img ] []
-                      -- inline CSS (via var)
-                    , hello model
-                      -- ext 'hello' component (takes 'model' as arg)
-                    , button [ class "btn btn-primary btn-lg", onClick Increment ]
-                        [ span [] [ text "FTW!" ] ]
-                    , button [ class "btn btn-primary btn-lg", onClick Reset ]
-                        [ span [] [ text "Reset!" ] ]
-                    ]
-                ]
+    div [ class "container", style [ ( "height", "100%" ), ( "background-color", model.color ) ] ]
+        [ div [ class "actions" ]
+            [ button [ class "btn", onClick ChangeColor ]
+                [ span [] [ text "Elm, Gimme Colors!" ] ]
             ]
         ]
-
-
-
--- CSS STYLES
-
-
-styles : { img : List ( String, String ) }
-styles =
-    { img =
-        [ ( "width", "25%" )
-        , ( "border", "none" )
-        ]
-    }
