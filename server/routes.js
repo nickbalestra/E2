@@ -1,8 +1,10 @@
-exports.foo = (req, res) =>
-  res.json({ foo: true })
-
-exports.bar = (req, res) =>
-  res.json({ bar: true })
-
-exports.baz = (req, res) =>
-  res.json({ baz: true })
+exports.color = (req, res) => {
+  const elmColors = [
+    '#5A6379',
+    '#5CB5CD',
+    '#F2AE00',
+    '#7CD32B'
+  ]
+  const random = Math.floor(Math.random() * elmColors.length)
+  return res.json(elmColors[random])
+}
