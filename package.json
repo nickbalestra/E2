@@ -21,7 +21,7 @@
   "homepage": "https://github.com/nickbalestra/webpack-express-elm-boilerplate",
   "scripts": {
     "pre-commit-msg": "echo JavaScript Standard Style Check... && exit 0",
-    "test": "standard server/**/*.js src/**/*.js",
+    "test": "standard server/**/*.js src/**/*.js && elm-test",
     "start": "node server/main",
     "prod": "NODE_ENV=production PORT=3000 node server/main",
     "postinstall": "elm-package install",
