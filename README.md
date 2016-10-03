@@ -4,7 +4,7 @@ A Simple, Scalable and Easy starting point for full stack web development using 
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 <br><br>
 
-[ ] TODO: Please read the related blog post: [The ultimate Elm Webpack setup](TODO) to know more about this boilerplate.
+[ ] TODO: Please read the related blog post: [The ultimate Elm Webpack setup](TODO) to know more about this stack and its relative boilerplate.
 
 **NOTE!** Use the latest version of Node, 6.x.x.
 
@@ -40,7 +40,7 @@ dist/
 ```
 
 ### Tests
- [ ] TODO
+[Elm-test](http://package.elm-lang.org/packages/elm-community/elm-test/latest) boilerplate included. To run the tests, simply run `npm test`
 
 ### APIs
 Routes are organized following the express [route separation example](https://github.com/expressjs/express/blob/master/examples/route-separation)
