@@ -1,6 +1,5 @@
-# webpack-express-elm-boilerplate
-A boilerplate for building applications with the e^2 stack (Elm + Express).
-Come packed with  a webpack workflow supporting hot module reload.
+# E2
+A Simple, Scalable and Easy starting point for full stack web development using JavaScript and Elm.
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 <br><br>
