@@ -30,12 +30,12 @@ A Simple, Scalable and Easy starting point for full stack web development using 
 Production `dist` directory structure:
 ```
 dist/
-  index.html
-  static/
-    css/
-      hash.css
-    js/
-      main-hash.min.js
+  |index.html
+  |static/
+    |css/
+      |hash.css
+    |js/
+      |main-hash.min.js
     ..
 ```
 
