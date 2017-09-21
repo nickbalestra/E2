@@ -1,7 +1,7 @@
-$baseColor : white;
+$baseColor: white;
 
 html {
-  height: 100%
+  height: 100%;
 }
 
 body {
@@ -35,5 +35,5 @@ body {
   text-decoration: none;
 }
 
-button:hover {cursor: pointer}
-button:focus {outline:0;}
+button:hover { cursor: pointer; }
+button:focus { outline: 0; }

@@ -6,7 +6,7 @@ A Simple, Scalable and Easy starting point for full stack web development using 
 
 Please read the related blog post: [E2: Elm + Express for full-stack web development](http://nick.balestra.ch/2016/E2-full-stack-web-development-with-elm-and-express/) to know more about this stack and its relative boilerplate.
 
-**NOTE!** Use the latest version of Node, 6.x.x.
+**NOTE!** Use the latest version of Node, 8.x.x.
 
 ## Installation
 
@@ -46,7 +46,7 @@ dist/
 Routes are organized following the express [route separation example](https://github.com/expressjs/express/blob/master/examples/route-separation)
 Allowing for a quick prototypation of API endpoints together with the elm client.
 
-A dummy `http://localhost:3000/color` endpoint is provided as reference. The endpoint return a random Elm color in the exadecimal format when hit with a get request.
+A dummy `http://localhost:3000/color` endpoint is provided as reference. The endpoint return a random Elm color in the hexadecimal format when hit with a get request.
 
 ### Elm-format, Standards JS and Precommit hook
   [Elm-format](https://github.com/avh4/elm-format) will take care of everything related to elm. For anything javascript related we'll rely on [standardJS](https://github.com/feross/standard).
@@ -55,5 +55,5 @@ A dummy `http://localhost:3000/color` endpoint is provided as reference. The end
 ***
 
 ## Elm by default
-The project runs with Elm by default and hot replacement of changes to the modules. Currently it is on 0.17.1
+The project runs with Elm by default and hot replacement of changes to the modules. Currently it is on 0.18.0
 A dummy Elm app, that consume the server API is provided as an example.

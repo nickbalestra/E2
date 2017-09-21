@@ -4,12 +4,10 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
-import Html.App as Html
-import Task exposing (Task)
 import Json.Decode exposing (Decoder)
 
 
-main : Program Never
+main : Program Never Model Msg
 main =
     Html.program
         { view = view
@@ -21,8 +19,9 @@ main =
 
 fetchColor : Cmd Msg
 fetchColor =
-    Http.get Json.Decode.string "http://localhost:3000/color"
-        |> Task.perform HandleColorError HandleNewColor
+    Http.send
+        HandleNewColor
+        (Http.get "http://localhost:3000/color" Json.Decode.string)
 
 
 
@@ -45,8 +44,7 @@ initialModel =
 
 type Msg
     = ChangeColor
-    | HandleNewColor String
-    | HandleColorError Http.Error
+    | HandleNewColor (Result Http.Error String)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -55,10 +53,10 @@ update msg model =
         ChangeColor ->
             ( model, fetchColor )
 
-        HandleNewColor color ->
+        HandleNewColor (Ok color) ->
             ( { model | color = color }, Cmd.none )
 
-        HandleColorError error ->
+        HandleNewColor (Err error) ->
             ( model, Cmd.none )
 
 

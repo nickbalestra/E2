@@ -10,13 +10,17 @@ const entryPath = path.join(__dirname, 'src/static/main.js')
 const outputPath = path.join(__dirname, '/dist/')
 
 const common = {
+  resolve: {
+    extensions: ['.js', '.json', '.elm', '.ts', '*'],
+  },
+
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new CopyWebpackPlugin([
       {
         from: 'src/static/img/',
-        to:   'static/img/'
-      }
+        to:   'static/img/',
+        ignore: '.gitkeep',
+      },
     ]),
     new HtmlWebpackPlugin({
       template: 'src/static/index.html',
@@ -26,17 +30,8 @@ const common = {
   ],
 
   module: {
-    loaders: [
-      {
-        test: /\.json?$/,
-        loader: 'json'
-      }
-    ]
+    noParse: [/.elm$/],
   },
-
-  postcss: [
-    autoprefixer({ browsers: ['last 2 versions']})
-  ]
 }
 
 if (TARGET === 'start') {
@@ -45,35 +40,46 @@ if (TARGET === 'start') {
 
     entry: [
       'webpack-hot-middleware/client?reload=true',
-      entryPath
+      entryPath,
     ],
 
     output: {
       path: outputPath,
       filename: 'static/js/[name].js',
-      publicPath: ''
+      publicPath: '',
     },
 
     module: {
-      loaders: [
+      rules: [
         {
           test:    /\.elm$/,
           exclude: [/elm-stuff/, /node_modules/],
-          loader:  'elm-hot!elm-webpack?verbose=true&warn=true'
+          use: [
+            {
+              loader: 'elm-hot-loader',
+            },
+            {
+              loader: 'elm-webpack-loader',
+              options: {
+                verbose: true,
+                warn: true,
+              },
+            },
+          ],
         },
         {
           test: /\.(css|scss)$/,
-          loaders: ['style', 'css', 'sass', 'postcss']
-        }
-      ]
+          use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
+        },
+      ],
     },
 
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': 'developement'
-      })
+        'process.env.NODE_ENV': 'development',
+      }),
     ],
   })
 }
@@ -87,42 +93,44 @@ if (TARGET === 'build') {
     output: {
       path: outputPath,
       filename: 'static/js/[name]-[hash].min.js',
-      publicPath: ''
+      publicPath: '',
     },
 
-     module: {
-      loaders: [
+    module: {
+      rules: [
         {
           test:    /\.elm$/,
           exclude: [/elm-stuff/, /node_modules/],
-          loader:  'elm-webpack'
+          loader:  'elm-webpack-loader'
         },
         {
           test: /\.(css|scss)$/,
-          loader: ExtractTextPlugin.extract(
-            'style',
-            'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!sass!postcss'
-          )
-        }
-      ]
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  minimize: true,
+                },
+              },
+              'sass-loader',
+              'postcss-loader',
+            ],
+          }),
+        },
+      ],
     },
 
     plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-        compressor: {
-          warnings: false,
-          screw_ie8: true
-        }
-      }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': 'production'
       }),
-      new ExtractTextPlugin('static/css/[hash].css', {allChunks: true}),
-      new webpack.optimize.UglifyJsPlugin({
-        minimize: true,
-        compressor: { warnings: false }
-        // mangle:  true
-      })
-    ]
+      new ExtractTextPlugin({
+        filename: 'static/css/[contenthash].css',
+        allChunks: true,
+      }),
+      new webpack.optimize.UglifyJsPlugin(),
+    ],
   })
 }
