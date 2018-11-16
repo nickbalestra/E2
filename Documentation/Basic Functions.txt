@@ -1,0 +1,28 @@
+-----HOMEPAGE-----
+getAllCards
+
+-----SINGLE CARD----
+getCard
+
+-----SIGN IN-----
+authenticate
+createUser
+
+-----ADMIN-----
+totalSales
+cardsSold
+orders
+totalProfit
+
+-----EDIT STORE-----
+getAllCards
+createCard
+editCard
+deleteCard
+
+-----CART-----
+addToCart
+removeFromCart
+changeQuantity
+removeAllFromCart
+getCart
