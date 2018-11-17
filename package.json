@@ -5,7 +5,7 @@
   "main": "server/main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nickbalestra/webpack-express-elm-boilerplate.git"
+    "url": "https://github.com/jonator/cs560group8finalproject.git"
   },
   "keywords": [
     "express",
@@ -13,12 +13,12 @@
     "elm",
     "node"
   ],
-  "author": "Nick Balestra",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nickbalestra/webpack-express-elm-boilerplate/issues"
   },
-  "homepage": "https://github.com/nickbalestra/webpack-express-elm-boilerplate",
+  "homepage": "https://github.com/jonator/cs560group8finalproject",
   "scripts": {
     "pre-commit-msg": "echo JavaScript Standard Style Check... && exit 0",
     "test": "standard server/**/*.js src/**/*.js && elm-test",
