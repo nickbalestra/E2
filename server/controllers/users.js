@@ -8,9 +8,7 @@ exports.getUser = async (req, res) => {
   return res.status(404).send()
 }
 
-exports.authenticateUser = async (req, res) => {
-  return res.status(200).send('authenticated')
-}
+exports.authenticateUser = async (req, res) => res.status(200).send('authenticated')
 
 exports.createUser = async (req, res) => {
   const user = req.body
