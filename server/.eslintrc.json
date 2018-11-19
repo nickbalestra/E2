@@ -1,0 +1,79 @@
+{
+  "extends": ["airbnb"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "impliedStrict": true,
+      "classes": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "semi": ["error", "never"],
+    "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": 0,
+    "linebreak-style": ["error", "windows"],
+    "space-before-function-paren": 1,
+    "indent": 0,
+    "no-trailing-spaces": 0,
+    "no-mixed-operators": 0,
+    "object-curly-newline": 0,
+    "function-paren-newline": 0,
+    "no-unused-vars": [
+      1,
+      {
+        "argsIgnorePattern": "res|next|^err"
+      }
+    ],
+    "no-console": 1,
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all"
+      }
+    ],
+    "no-shadow": [
+      2,
+      {
+        "hoist": "all",
+        "allow": ["resolve", "reject", "done", "next", "err", "error"]
+      }
+    ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "arrow-body-style": [2, "as-needed"],
+    "arrow-parens": [2, "as-needed"],
+    "no-unused-expressions": [
+      2,
+      {
+        "allowTaggedTemplates": true
+      }
+    ],
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "comma-dangle": 0,
+    "max-len": 0,
+    "import/extensions": 0,
+    "no-use-before-define": 0,
+    "import/prefer-default-export": 0,
+    "import": 0,
+    "no-underscore-dangle": 0,
+    "no-return-assign": 0,
+    "func-names": 0,
+    "consistent-return": 0
+  }
+}
