@@ -1,8 +1,8 @@
 {
     "version": "1.0.0",
     "summary": "",
-    "repository": "https://github.com/nickbalestra/webpack-express-elm-boilerplate.git",
-    "license": "MIT",
+    "repository": "https://github.com/jonator/cs560group8finalproject.git",
+    "license": "",
     "source-directories": [
         "src/elm"
     ],
