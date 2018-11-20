@@ -6,6 +6,8 @@ const cors = require('cors')
 const path = require('path')
 const errorHandlers = require('./handlers/errorHandlers')
 const setupRoutes = require('./routes')
+const db = require('./utils/db')
+const generate = require('./utils/generate')
 
 // initialize the application and create the routes
 const app = express()
@@ -25,6 +27,26 @@ setupRoutes(app)
 app.set('json spaces', 2)
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+
+/* Initialize the database with some information */
+const users = Array.from({ length: 10 }, () => generate.user())
+users.push(generate.user({ userId: 1, isAdmin: true }))
+const cards = generate.cards(10)
+const orders = users.map(user => ({
+  orderId: generate.id(),
+  user,
+  orderLines: generate.orderLines(cards),
+  orderDate: generate.orderDate(),
+}))
+const cartItems = users.map(user => ({
+  userId: user.userId,
+  cardId: cards[4].cardId,
+  quantity: 3,
+}))
+db.users = users
+db.cards = cards
+db.orders = orders
+db.cartItems = cartItems
 
 // Serving compiled elm client
 if (isDevelopment) {

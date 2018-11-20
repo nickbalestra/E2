@@ -1,5 +1,7 @@
+const db = require('../utils/db')
+
 exports.getOrders = async (req, res) => {
-  const orders = ['Groceries', 'Brianna a Babe']
+  const orders = await db.getOrders()
   if (orders) {
     return res.json(orders)
   }

@@ -1,18 +1,32 @@
+const db = require('../utils/db')
+
 exports.getUser = async (req, res) => {
-  const user = {
-    id: 23423,
+  const user = await db.getUser(parseInt(req.params.userId, 10))
+  if (!user) {
+    return res.status(404).send()
   }
-  if (user) {
-    return res.json(user)
-  }
-  return res.status(404).send()
+  const cart = await db.getCart(parseInt(req.params.userId, 10))
+
+  return res.json({ user, cart })
 }
 
-exports.authenticateUser = async (req, res) => res.status(200).send('authenticated')
+exports.getUsers = async (req, res) => {
+  const users = await db.getUsers()
+  return res.json(users)
+}
+
+exports.authenticateUser = async (req, res) => {
+  const { email, password } = req.params
+  const isUser = await db.authenticateUser({ email, password })
+  if (isUser) {
+    return res.send('authenticated')
+  }
+  return res.status(401).send('unauthenticated')
+}
 
 exports.createUser = async (req, res) => {
-  const user = req.body
-  if (user) {
-    return res.json(user)
+  const createdUser = await db.insertUser(req.body)
+  if (createdUser) {
+    return res.json(createdUser)
   }
 }
