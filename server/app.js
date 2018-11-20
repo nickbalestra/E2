@@ -29,19 +29,19 @@ app.set('json spaces', 2)
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 /* Initialize the database with some information */
-const users = Array.from({ length: 10 }, () => generate.user())
+const users = Array.from({ length: 9 }, () => generate.user())
 users.push(generate.user({ userId: 1, isAdmin: true }))
 const cards = generate.cards(10)
-const orders = users.map(user => ({
+const orders = users.map((user, index) => ({
   orderId: generate.id(),
   user,
-  orderLines: generate.orderLines(cards),
+  orderLines: generate.orderLines([cards[index], cards[(index % 2) + 1], cards[(index % 3) + 1]]),
   orderDate: generate.orderDate(),
 }))
-const cartItems = users.map(user => ({
+const cartItems = users.map((user, index) => ({
   userId: user.userId,
-  cardId: cards[4].cardId,
-  quantity: 3,
+  cardId: cards[index].cardId,
+  quantity: index,
 }))
 db.users = users
 db.cards = cards

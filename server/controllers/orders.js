@@ -1,5 +1,7 @@
 const db = require('../utils/db')
 
+const intId = (req, property) => parseInt(req.params[property], 10)
+
 exports.getOrders = async (req, res) => {
   const orders = await db.getOrders()
   if (orders) {
@@ -9,9 +11,7 @@ exports.getOrders = async (req, res) => {
 }
 
 exports.getOrder = async (req, res) => {
-  const order = {
-    id: 23423,
-  }
+  const order = await db.getOrder(intId(req, 'orderId'))
   if (order) {
     return res.json(order)
   }
@@ -19,23 +19,14 @@ exports.getOrder = async (req, res) => {
 }
 
 exports.getOrderTotal = async (req, res) => {
-  const amount = 23423
-  return res.json(amount)
+  const orderTotal = await db.getOrderTotal()
+  return res.json(orderTotal)
 }
 
 exports.getCardsSoldByCategory = async (req, res) => {
-  const categories = [
-    {
-      category: 'Christmas',
-      quantity: 301,
-    },
-    {
-      category: 'Birthday',
-      quantity: 5130,
-    },
-  ]
-  if (categories) {
-    return res.json(categories)
+  const cardsSoldByCategory = await db.getCardsSoldByCategory()
+  if (cardsSoldByCategory) {
+    return res.json(cardsSoldByCategory)
   }
   return res.status(404).send()
 }

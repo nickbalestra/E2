@@ -1,13 +1,14 @@
 const db = require('../utils/db')
 
+const intId = (req, property) => parseInt(req.params[property], 10)
+
 exports.getUser = async (req, res) => {
-  const user = await db.getUser(parseInt(req.params.userId, 10))
-  if (!user) {
+  const userAndCart = await db.getUser(intId(req, 'userId'))
+  if (!userAndCart) {
     return res.status(404).send()
   }
-  const cart = await db.getCart(parseInt(req.params.userId, 10))
 
-  return res.json({ user, cart })
+  return res.json(userAndCart)
 }
 
 exports.getUsers = async (req, res) => {
@@ -29,4 +30,42 @@ exports.createUser = async (req, res) => {
   if (createdUser) {
     return res.json(createdUser)
   }
+}
+
+exports.getCartItems = async (req, res) => {
+  const cartItems = await db.getCartItemsByUser(intId(req, 'userId'))
+  if (!cartItems) {
+    return res.status(404).send('no cart items found')
+  }
+  return res.json(cartItems)
+}
+
+exports.deleteCartItems = async (req, res) => {
+  const cartItems = await db.deleteCartItemsByUser(intId(req, 'userId'))
+  if (!cartItems) {
+    return res.status(404)
+  }
+  return res.json(cartItems)
+}
+
+exports.createCartItem = async (req, res) => {
+  const cartItem = await db.insertCartItem(req.body)
+  if (!cartItem) {
+    return res.status(404)
+  }
+  return res.json(cartItem)
+}
+exports.updateCartItem = async (req, res) => {
+  const cartItem = await db.updateCartItem(req.body)
+  if (!cartItem) {
+    return res.status(404)
+  }
+  return res.json(cartItem)
+}
+exports.deleteCartItem = async (req, res) => {
+  const cartItem = await db.deleteCartItem(intId(req, 'userId'), intId(req, 'cardId'))
+  if (!cartItem) {
+    return res.status(404)
+  }
+  return res.json(cartItem)
 }
