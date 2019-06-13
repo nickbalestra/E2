@@ -57,4 +57,3 @@ A dummy `http://localhost:3000/color` endpoint is provided as reference. The end
 ## Elm by default
 The project runs with Elm by default and hot replacement of changes to the modules. Currently it is on 0.17.1
 A dummy Elm app, that consume the server API is provided as an example.
-
