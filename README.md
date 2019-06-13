@@ -59,5 +59,7 @@ The project runs with Elm by default and hot replacement of changes to the modul
 A dummy Elm app, that consume the server API is provided as an example.
 
 ## Docker-compose usage
-* To start server at port 3000: docker-compose up 
-* To stop server: docker-compose down 
+* To start server at port 3000, type the following command in terminal: 
+  * docker-compose up 
+* To stop server, type following command in terminal: 
+  * docker-compose down 
