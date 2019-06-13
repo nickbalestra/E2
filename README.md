@@ -58,8 +58,3 @@ A dummy `http://localhost:3000/color` endpoint is provided as reference. The end
 The project runs with Elm by default and hot replacement of changes to the modules. Currently it is on 0.17.1
 A dummy Elm app, that consume the server API is provided as an example.
 
-## docker-compose usage
-* To start server at port 3000, type the following command in terminal: 
-  * docker-compose up 
-* To stop server, type following command in terminal: 
-  * docker-compose down 
